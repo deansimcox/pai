@@ -253,7 +253,9 @@ var smoothScrollTo = function(element, target, duration) {
 			if( wWidth < 2000){
 				var wHeight = $(win).outerHeight();
 				var newScale = wWidth / 2000;
+				var newScaleOp = 1 + (1 - newScale);
 				body.attr('style', '-webkit-transform: scale('+newScale+');-moz-transform: scale('+newScale+');-ms-transform: scale('+newScale+');-o-transform: scale('+newScale+');transform: scale('+newScale+');height:'+wHeight+'px;');
+				loader.attr('style', '-webkit-transform: scale('+newScaleOp+');-moz-transform: scale('+newScaleOp+');-ms-transform: scale('+newScaleOp+');-o-transform: scale('+newScaleOp+');transform: scale('+newScaleOp+');');
 				if(typeof func === 'function'){
 					func( newScale );
 				}
