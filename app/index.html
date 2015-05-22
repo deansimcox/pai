@@ -1,0 +1,370 @@
+<!doctype html>
+<html class="no-js">
+	<head>
+		<meta charset="utf-8">
+		<title>perth airport interactive</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
+		<link rel="shortcut icon" href="favicon.ico">
+		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+		<!-- build:css(.) styles/vendor.css -->
+		<!-- bower:css -->
+		<!-- endbower -->
+		<!-- endbuild -->
+		<!-- build:css(.tmp) styles/main.css -->
+		<link rel="stylesheet" href="styles/main.css">
+		<!-- endbuild -->
+		<!-- build:js scripts/vendor/modernizr.js -->
+		<script src="bower_components/modernizr/modernizr.js"></script>
+		<!-- endbuild -->
+
+	</head>
+	<body>
+
+		<svg class="hidden">
+			<defs>
+				<symbol id="icon-chevron-left">
+					<title>Chevron left icon</title>
+					<path d="M5.2,9.3c0.2,0.2,0.2,0.4,0,0.6C5.1,10,4.8,10,4.7,9.9L0.1,5.3C0,5.1,0,4.9,0.1,4.7l4.6-4.6 C4.8,0,5.1,0,5.2,0.1c0.2,0.2,0.2,0.4,0,0.6L1.1,5L5.2,9.3z"/>
+				</symbol>
+				<symbol id="icon-chevron-right">
+					<title>Chevron right icon</title>
+					<path d="M0.1,0.7C0,0.5,0,0.3,0.1,0.1C0.3,0,0.5,0,0.7,0.1l4.6,4.6c0.2,0.2,0.2,0.4,0,0.6L0.7,9.9 C0.5,10,0.3,10,0.1,9.9C0,9.7,0,9.5,0.1,9.3L4.3,5L0.1,0.7z"/>
+				</symbol>
+			</defs>
+		</svg>
+
+		<div class="screen-loader">
+			<p class="loading-text">Fasten seatbelts ...</p>			
+
+			<svg id="loading-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 400 400" enable-background="new 0 0 400 400" style=" height: 300px;">
+				<g fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-miterlimit="10" stroke-dasharray="356px, 257px">
+					<circle cx="200" cy="200" r="195" id="loading-circle" ></circle>
+				</g>
+			</svg>
+
+		</div>
+
+		<div class="plane">
+			<div class="plane__seat">
+				<div class="plane__tv">
+
+					<img src="images/cloud-1.svg" class="cloud cloud-1" alt="">
+					<img src="images/cloud-2.svg" class="cloud cloud-2" alt="">
+					<img src="images/cloud-3.svg" class="cloud cloud-3" alt="">
+					<img src="images/cloud-4.svg" class="cloud cloud-4" alt="">
+
+					<div class="stage">
+
+						<div class="screen screen-intro">
+							<div class="screen-intro__content">
+								<p class="heading-1">Welcome aboard</p>
+								<p class="heading-2">Join us on a creative journey</p>
+								<button class="btn btn-intro" data-stage-go="1">Begin
+									<svg viewBox="0 0 5.3 10" class="icon icon-chevron-right" xmlns="http://www.w3.org/2000/svg">
+										<use xlink:href="#icon-chevron-right"></use>
+									</svg>
+								</button>
+							</div>
+						</div><!-- 
+
+						 --><div class="screen screen-1 stage-1">
+							<div class="screen-content">
+								<p class="heading-1">Welcome aboard</p>
+								<p class="heading-2">To ensure a successful creative solution for this project, we will use a blend of design talent from our Australian offices and also take advantage of the wider Precedent design team of 20 across all our studios. This allows us to share best practice ideas by tapping into wider expertise, bringing clear benefits for you the client.</p>
+
+								<svg id="belt" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve" style=" height: 160px;">
+									<g fill="none" stroke="#a3a3a3" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10">
+										<circle id="belt-circle" cx="100" cy="100" r="95" style="stroke-dasharray: 597px, 599px; stroke-dashoffset: 599px;"></circle>
+									</g>
+									<g fill="#515151" transform="translate(48,78)">
+										<path d="M97.384,38.448 C97.384,38.448 82.312,28.334 82.312,28.334 C81.604,27.858 81.604,27.083 82.312,26.607 C82.312,26.607 89.434,21.829 89.434,21.829 C90.142,21.353 91.300,21.353 92.008,21.829 C92.008,21.829 97.384,25.436 97.384,25.436 C98.092,25.912 98.671,26.993 98.671,27.839 C98.671,27.839 98.671,37.773 98.671,37.773 C98.671,38.619 98.092,38.923 97.384,38.448 ZM78.603,25.902 C78.603,25.902 78.603,30.394 78.603,30.394 C78.603,32.785 76.629,34.739 74.218,34.739 C74.218,34.739 54.087,34.739 54.087,34.739 C51.674,34.739 49.701,32.785 49.701,30.394 C49.701,30.394 49.701,10.450 49.701,10.450 C49.701,8.060 51.674,6.105 54.087,6.105 C54.087,6.105 74.218,6.105 74.218,6.105 C76.629,6.105 78.603,8.060 78.603,10.450 C78.603,10.450 78.603,12.891 78.603,12.891 C78.603,12.891 97.386,0.228 97.386,0.228 C98.093,-0.248 98.671,0.055 98.671,0.901 C98.671,0.901 98.671,10.834 98.671,10.834 C98.671,11.681 98.093,12.763 97.386,13.240 C97.386,13.240 78.603,25.902 78.603,25.902 ZM73.694,10.969 C73.694,10.969 54.609,10.969 54.609,10.969 C54.609,10.969 54.609,29.874 54.609,29.874 C54.609,29.874 73.694,29.874 73.694,29.874 C73.694,29.874 73.694,10.969 73.694,10.969 ZM70.367,26.580 C70.367,26.580 57.937,26.580 57.937,26.580 C57.937,26.580 57.937,14.265 57.937,14.265 C57.937,14.265 70.367,14.265 70.367,14.265 C70.367,14.265 70.367,26.580 70.367,26.580 ZM38.580,29.308 C38.580,29.308 29.927,29.308 29.927,29.308 C29.927,29.308 29.927,33.200 29.927,33.200 C29.927,34.046 29.229,34.739 28.374,34.739 C28.374,34.739 21.615,34.739 21.615,34.739 C20.761,34.739 20.062,34.046 20.062,33.200 C20.062,33.200 20.062,25.842 20.062,25.842 C20.062,25.842 1.557,25.842 1.557,25.842 C0.703,25.842 0.004,25.150 0.004,24.303 C0.004,24.303 0.004,16.543 0.004,16.543 C0.004,15.696 0.703,15.003 1.557,15.004 C1.557,15.004 20.063,15.004 20.063,15.004 C20.063,15.004 20.063,7.645 20.063,7.645 C20.063,6.799 20.761,6.106 21.616,6.106 C21.616,6.106 28.375,6.106 28.375,6.106 C29.229,6.106 29.928,6.798 29.928,7.645 C29.928,7.645 29.928,11.537 29.928,11.537 C29.928,11.537 38.582,11.537 38.582,11.537 C40.994,11.537 42.967,13.492 42.966,15.881 C42.966,15.881 42.966,24.964 42.966,24.964 C42.966,27.354 40.992,29.308 38.580,29.308 ZM38.059,16.401 C38.059,16.401 29.928,16.401 29.928,16.401 C29.928,16.401 29.928,24.444 29.928,24.444 C29.928,24.444 38.059,24.444 38.059,24.444 C38.059,24.444 38.059,16.401 38.059,16.401 Z" id="belt-icon" class="cls-2" fill-rule="evenodd"/>
+									</g>
+								</svg>
+
+							</div>
+						</div><!-- 
+
+						 --><div class="screen screen-2 stage-2">
+							<div class="screen-content">
+								<p class="heading-1">Your crew</p>
+								<p class="heading-2">We're pleased to introduce Perth Airport's <br>Digital Experience Design team, <br>led by regional board director Dan Baker.</p>
+
+								<div class="team">
+									<div class="team__member" data-stage-go="3">
+										<div class="team__member-img">
+											<img src="images/content/Dan.jpg" alt="Dan Baker">
+										</div>
+										<p class="team__member-details">
+											<strong>Dan Baker</strong>
+											<span>Digital Experience Director</span>
+										</p>
+									</div>
+									<div class="team__member" data-stage-go="4">
+										<div class="team__member-img">
+											<img src="images/content/Helen.jpg" alt="Helen Whattler">
+										</div>
+										<p class="team__member-details">
+											<strong>Helen Whattler</strong>
+											<span>Digital Experience Consultant</span>
+										</p>
+									</div>
+									<div class="team__member" data-stage-go="5">
+										<div class="team__member-img">
+											<img src="images/content/Ben.jpg" alt="Ben Tootell">
+										</div>
+										<p class="team__member-details">
+											<strong>Ben Tootell</strong>
+											<span>Digital Experience Consultant</span>
+										</p>
+									</div>
+									<div class="team__member" data-stage-go="6">
+										<div class="team__member-img">
+											<img src="images/content/Joseph.jpg" alt="Joseph Barker">
+										</div>
+										<p class="team__member-details">
+											<strong>Joseph Barker</strong>
+											<span>Digital Designer</span>
+										</p>
+									</div>
+									<div class="team__member" data-stage-go="7">
+										<div class="team__member-img">
+											<img src="images/content/Frieda.jpg" alt="Frieda Mason">
+										</div>
+										<p class="team__member-details">
+											<strong>Frieda Mason</strong>
+											<span>Digital Designer</span>
+										</p>
+									</div>
+								</div>
+
+							</div>
+						</div><!-- 
+
+						 --><div class="screen screen-3 stage-3">
+							<div class="screen-content">
+								<p class="heading-1">Your crew</p>
+								<div class="team__member-img">
+									<img src="images/content/Dan.jpg" alt="Dan Baker">
+								</div>
+								<p class="heading-2">Dan Baker – Digital Experience Director</p>
+								<p>Dan brings over 15 years of experience to the team and will work with you to define your vision for the project and key business objectives, ensuring that this thinking is reflected in the strategic direction, experience and design. Dan is a regional board director at Precedent, he holds a BA(Hons) in Architecture and Design from Brighton University, MSc in Virtual Environments from University College London, and a postgraduate qualification in User Interface Design and Evaluation from the Open University.</p>
+							</div>
+						</div><!-- 
+
+						 --><div class="screen screen-3 stage-4">
+							<div class="screen-content">
+								<p class="heading-1">Your crew</p>
+								<div class="team__member-img">
+									<img src="images/content/Helen.jpg" alt="Helen Whattler">
+								</div>
+								<p class="heading-2">Helen Whattler – Digital Experience Consultant</p>
+								<p>Helen's background spans visual design and interaction design and will ensure the research and protoyping phases of the project result in a beautiful and useable platform for Perth Airport. Helen has a Bachelor of Arts (Hons) in Graphic Media from the University of the Creative Arts and last year was voted #5 on The Drum’s UK 50 under 30 Women Digital List.</p>
+							</div>
+						</div><!-- 
+
+						 --><div class="screen screen-3 stage-5">
+							<div class="screen-content">
+								<p class="heading-1">Your crew</p>
+								<div class="team__member-img">
+									<img src="images/content/Ben.jpg" alt="Ben Tootell">
+								</div>
+								<p class="heading-2">Ben Tootell – Digital Experience Consultant</p>
+								<p>Ben brings over 13 years’ experience to the team and will work with you to create the blueprint for your project following a user-centred design process.  Ben has a Bachelor of Arts in Information Technology, majoring in Online and Web-based systems.</p>
+							</div>
+						</div><!-- 
+
+						 --><div class="screen screen-3 stage-6">
+							<div class="screen-content">
+								<p class="heading-1">Your crew</p>
+								<div class="team__member-img">
+									<img src="images/content/Joseph.jpg" alt="Joseph Barker">
+								</div>
+								<p class="heading-2">Joseph Barker - Digital Designer</p>
+								<p>Joseph works closely with Dan, Helen and Ben to translate the research and protoyping into innovative and functional visual solutions. Joseph has a BA (Hons) in Graphic Design from Central Saint Martin’s College of Art and has written a book about the colour blue, called 'Deep Blue'.</p>
+							</div>
+						</div><!-- 
+
+						 --><div class="screen screen-3 stage-7">
+							<div class="screen-content">
+								<p class="heading-1">Your crew</p>
+								<div class="team__member-img">
+									<img src="images/content/Frieda.jpg" alt="Frieda Mason">
+								</div>
+								<p class="heading-2">Frieda Mason - Digital Designer</p>
+								<p>Frieda's strength in working closely with UX, front-end and back-end developers ensures her designs translate seamlessly across all devices and channels. Frieda has extensive experience working with Tier 1 Australian brands such as Coles, ANZ and Cotton-on Group. She also holds a BA (Hons) in Multimedia from RMIT University.</p>
+							</div>
+						</div><!-- 
+
+						 --><div class="screen screen-4 stage-8">
+							<div class="screen-content">
+								<p class="heading-1">Inflight highlights</p>
+								<p class="heading-2">Here are some recent projects we have completed, <br>giving you a quick overview of our design capabilities.</p>
+
+								<svg id="next-arrow" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve" style=" height: 160px;" data-stage-next>
+									<g fill="none" stroke="#A3A3A3" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10">
+										<circle id="next-arrow-circle" cx="100" cy="100" r="95" style="stroke-dasharray: 597px, 599px; stroke-dashoffset: 599px;"></circle>
+									</g>
+									<g fill="#515151" transform="translate(22,22)">
+										<path id="next-arrow-icon" d="M132.5,78.7l-18.4-18.2c-0.7-0.7-1.9-0.7-2.6,0c-0.7,0.7-0.7,1.9,0,2.6l15.2,15.1H28.8 c-1,0-1.8,0.8-1.8,1.8c0,1,0.8,1.8,1.8,1.8h97.9l-15.2,15.1c-0.7,0.7-0.7,1.9,0,2.6c0.4,0.4,0.8,0.5,1.3,0.5c0.5,0,0.9-0.2,1.3-0.5 l18.4-18.2C133.2,80.6,133.2,79.4,132.5,78.7z"/>
+									</g>
+								</svg>
+							</div>
+						</div><!-- 
+
+						 --><div class="screen screen-5 stage-9">
+							<div class="screen-content">
+								<p>Perth City</p>
+								<div class="highlight highlight-1"></div>
+							</div>
+						</div><!-- 
+
+						 --><div class="screen screen-5 stage-10">
+							<div class="screen-content">
+								<p>Trafalgar Travel</p>
+								<div class="highlight highlight-2"></div>
+							</div>
+						</div><!-- 
+
+						 --><div class="screen screen-5 stage-11">
+							<div class="screen-content">
+								<p>St. Andrews</p>
+								<div class="highlight highlight-3"></div>
+							</div>
+						</div><!-- 
+
+						 --><div class="screen screen-5 stage-12">
+							<div class="screen-content">
+								<p>Tom Morris</p>
+								<div class="highlight highlight-4"></div>
+							</div>
+						</div><!-- 
+
+						 --><div class="screen screen-5 stage-13">
+							<div class="screen-content">
+								<p>WA Museum - National ANZAC Centre</p>
+								<div class="highlight highlight-5"></div>
+							</div>
+						</div><!-- 
+
+						 --><div class="screen screen-5 stage-14">
+							<div class="screen-content">
+								<p>Australian Red Cross Blood Service</p>
+								<div class="highlight highlight-6"></div>
+							</div>
+						</div><!-- 
+
+						 --><div class="screen screen-6 stage-15">
+							<div class="screen-content">
+								<p class="heading-1">Call crew</p>
+								<p class="heading-2">If you need any assistance, please contact:</p>
+								<p class="heading-3">
+									<span class="name">Alice Beament</span><br>
+									<span>Phone - 08 6210 3100</span><br>
+									<span>Mobile - 0426 954 905</span><br>
+									<a href="mailto:alice.beament@precedent.com">alice.beament@precedent.com</a>
+								</p>
+
+								<svg id="attendant" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" style=" height: 160px;">
+									<g fill="none" stroke="#a3a3a3" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10">
+										<circle cx="100" cy="100" r="95" id="attendant-circle" ></circle>
+									</g>
+									<g fill="#515151" transform="translate(70,55)">
+										<path d="M46.307,61.407 C46.307,61.407 40.080,41.165 40.080,41.165 C40.080,41.165 36.821,29.104 36.821,29.104 C36.414,27.889 36.020,27.243 35.418,27.243 C34.815,27.243 38.050,48.801 38.050,48.801 C38.050,48.801 38.046,48.801 38.046,48.801 C38.046,48.801 39.336,61.779 37.194,61.779 C37.194,61.779 35.805,61.779 35.805,61.779 C35.805,61.779 33.931,90.247 33.931,90.247 C33.931,93.650 32.093,96.465 29.688,96.998 C29.688,96.998 30.208,62.957 30.208,62.957 C30.208,61.926 29.466,62.086 28.555,62.086 C27.644,62.086 26.901,61.926 26.901,62.957 C26.901,62.957 27.422,96.999 27.422,96.999 C25.017,96.466 23.179,93.651 23.179,90.248 C23.179,90.248 21.307,61.780 21.307,61.780 C21.307,61.780 19.917,61.780 19.917,61.780 C17.772,61.780 19.063,48.802 19.063,48.802 C19.063,48.802 22.292,27.244 21.693,27.244 C21.090,27.244 20.697,27.891 20.289,29.105 C20.289,29.105 17.678,38.768 17.678,38.768 C17.678,38.768 17.730,38.767 17.730,38.767 C17.730,38.767 16.254,43.180 16.254,43.180 C11.171,43.234 6.561,42.558 4.599,42.557 C2.506,42.559 1.399,41.839 0.013,39.483 C0.013,39.483 13.107,38.961 13.107,38.961 C14.357,34.545 15.565,30.300 16.292,27.759 C17.949,21.950 19.712,19.599 25.188,19.599 C25.188,19.599 31.925,19.599 31.925,19.599 C37.401,19.599 39.165,22.069 40.825,27.877 C41.663,30.819 43.147,36.040 44.595,41.167 C46.004,46.169 47.166,52.917 47.689,54.852 C48.240,56.891 48.165,59.433 46.307,61.407 ZM28.715,18.300 C26.095,18.300 23.483,13.127 23.483,9.319 C23.483,6.682 24.607,4.396 26.258,3.236 C27.312,1.397 28.827,-0.130 29.642,-0.009 C30.425,0.108 31.393,1.882 31.898,3.859 C33.142,5.118 33.948,7.093 33.948,9.319 C33.948,13.127 31.336,18.300 28.715,18.300 ZM5.555,37.773 C5.555,37.994 5.398,38.170 5.203,38.170 C5.203,38.170 1.159,38.170 1.159,38.170 C0.965,38.170 0.807,37.994 0.807,37.773 C0.807,37.773 0.120,27.262 0.120,27.262 C0.120,27.152 0.078,26.930 0.333,26.921 C0.333,26.921 6.030,26.921 6.030,26.921 C6.327,26.906 6.243,27.152 6.243,27.262 C6.243,27.262 5.555,37.773 5.555,37.773 Z" id="attendant-icon" class="cls-2" fill-rule="evenodd"/>
+									</g>
+								</svg>
+							</div>
+						</div>
+
+					</div><!-- stage -->
+
+					<div class="stage-controls">
+
+						<button class="stage-controls-prev" data-stage-prev>
+							<span class="visuallyhidden">Previous stage</span>
+							<svg viewBox="0 0 5.3 10" class="icon icon-chevron-left" xmlns="http://www.w3.org/2000/svg">
+								<use xlink:href="#icon-chevron-left"></use>
+							</svg>
+						</button>
+
+						<button class="stage-controls-next" data-stage-next>
+							<span class="visuallyhidden">Next stage</span>
+							<svg viewBox="0 0 5.3 10" class="icon icon-chevron-right" xmlns="http://www.w3.org/2000/svg">
+								<use xlink:href="#icon-chevron-right"></use>
+							</svg>
+						</button>
+						
+					</div>
+
+					<div class="icon-plane show-line">
+						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="28" height="18" viewBox="0 0 28 18" id="plane">
+							<g transform="translate(2,0)">
+								<path fill="#a3a3a3" d="M4.778,12.006 C4.778,12.006 15.491,9.635 23.147,1.604 C23.147,1.604 24.742,-0.000 21.618,-0.000 C18.984,-0.000 15.218,2.921 15.218,2.921 C15.218,2.921 4.777,1.219 4.777,1.219 C4.777,1.219 2.755,3.339 2.755,3.339 C2.755,3.339 8.450,6.227 8.450,6.227 C8.450,6.227 5.020,8.665 5.020,8.665 C5.020,8.665 2.082,7.126 2.082,7.126 C2.082,7.126 0.001,8.153 0.001,8.153 C0.001,8.153 2.207,10.561 4.778,12.006 Z" id="path-1" class="cls-2" fill-rule="evenodd"/>
+							</g>
+							<g fill="none" stroke="#a3a3a3" stroke-width="3" stroke-linecap="round">
+								<line x1="0" y1="18" x2="28" y2="18" id="plane-border" style="stroke-dasharray: 28px, 30px; stroke-dashoffset: 30px;" />
+							</g>
+						</svg>
+					</div>
+
+					<div class="stage-progress">
+
+						<div class="stage-progress__line">
+
+							<span class="btn-point--main btn-point-1" data-stage-go="1"></span>
+							<span class="btn-point--main btn-point-2" data-stage-go="2"></span>
+							<span class="btn-point btn-point-3" data-stage-go="3"></span>
+							<span class="btn-point btn-point-4" data-stage-go="4"></span>
+							<span class="btn-point btn-point-5" data-stage-go="5"></span>
+							<span class="btn-point btn-point-6" data-stage-go="6"></span>
+							<span class="btn-point btn-point-7" data-stage-go="7"></span>
+							<span class="btn-point--main btn-point-8" data-stage-go="8"></span>
+							<span class="btn-point btn-point-9" data-stage-go="9"></span>
+							<span class="btn-point btn-point-10" data-stage-go="10"></span>
+							<span class="btn-point btn-point-11" data-stage-go="11"></span>
+							<span class="btn-point btn-point-12" data-stage-go="12"></span>
+							<span class="btn-point btn-point-13" data-stage-go="13"></span>
+							<span class="btn-point btn-point-14" data-stage-go="14"></span>
+							<span class="btn-point--main btn-point-15" data-stage-go="15"></span>
+
+						</div>
+
+						<div class="stage-progress__labels">
+
+							<span class="label-1" data-stage-go="1">Welcome</span>
+							<span class="label-2" data-stage-go="2">Your crew</span>
+							<span class="label-3" data-stage-go="8">Inflight highlights</span>
+							<span class="label-4" data-stage-go="15">Call crew</span>
+
+						</div>
+						
+					</div>
+
+				</div>
+			</div>
+		</div>
+	
+		<!-- build:js(.) scripts/vendor.js -->
+		<!-- bower:js -->
+		<script src="bower_components/jquery/dist/jquery.js"></script>
+		<script src="bower_components/vide/dist/jquery.vide.js"></script>
+		<script src="bower_components/greensock/src/uncompressed/TweenMax.js"></script>
+		<script src="bower_components/vivus/dist/vivus.js"></script>
+		<!-- endbower -->
+		<!-- endbuild -->
+
+		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+		<script>
+			(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+			function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+			e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+			e.src='//www.google-analytics.com/analytics.js';
+			r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+			ga('create','UA-XXXXX-X');ga('send','pageview');
+		</script>
+
+		<!-- build:js({app,.tmp}) scripts/main.js -->
+		<script src="scripts/main.js"></script>
+		<!-- endbuild -->
+	</body>
+</html>

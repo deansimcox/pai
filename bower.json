@@ -1,0 +1,11 @@
+{
+  "name": "perth-airport-interactive",
+  "private": true,
+  "dependencies": {
+    "jquery": "~1.11.1",
+    "modernizr": "~2.8.2",
+    "vide": "~0.3.4",
+    "greensock": "~1.16.1",
+    "vivus": "~0.2.1"
+  }
+}

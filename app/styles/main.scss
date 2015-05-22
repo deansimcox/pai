@@ -1,0 +1,881 @@
+// bower:scss
+// endbower
+
+
+@font-face {
+	font-family: 'ff-book';
+	src: url('../fonts/ff-book.eot');
+	src: url('../fonts/ff-book.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/ff-book.woff') format('woff'),
+		 url('../fonts/ff-book.ttf') format('truetype'),
+		 url('../fonts/ff-book.svg#ff-book') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'ff-bold';
+	src: url('../fonts/ff-bold.eot');
+	src: url('../fonts/ff-bold.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/ff-bold.woff') format('woff'),
+		 url('../fonts/ff-bold.ttf') format('truetype'),
+		 url('../fonts/ff-bold.svg#ff-bold') format('svg');
+	font-weight: 700;
+	font-style: normal;
+}
+
+
+
+// =============================
+//	VARIABLES
+// =============================
+
+// Sass colour map
+$colours: (
+	orange: (
+		base: #ee7f00
+	),
+	grey: (
+		light: #a3a3a3,
+		base: #505050,
+		dark: #252525
+	)
+);
+
+// Base font size
+$base-font-size: 16;
+
+// TYPOGRAPHY FONT FAMILIES
+$ff-body: 'ff-book', sans-serif;
+$ff-heading: 'ff-bold', sans-serif;
+
+// Cubic bezier for transitions.
+$ease: cubic-bezier(.26,.85,.46,.99);
+
+
+
+
+// =============================
+//	FUNCTIONS
+// =============================
+
+// Function to access colour palette
+@function c($palette, $tone: 'base') {
+	@return map-get(map-get($colours, $palette), $tone);
+}
+
+// Converts pixel value into an em value
+@function em($px, $base: $base-font-size) {
+	@return ($px / $base) * 1em;
+}
+
+
+
+// =============================
+//    MIXINS 
+// =============================
+
+// Mixin for adding media queries for breakpoints
+@mixin bp($point) {
+	@if $point == lg {
+		@media (min-width: 1200px) { @content ; }
+	}
+	@else if $point == md {
+		@media (min-width: 992px) { @content ; }
+	}
+	@else if $point == sm-max {
+		@media (max-width: 991px) { @content ; }
+	}
+	@else if $point == sm {
+		@media (min-width: 768px)  { @content ; }
+	}
+	@else if $point == xs {
+		@media (max-width: 767px)  { @content ; }
+	}
+}
+
+// Adds transition to declaration
+@mixin trans( $time: .3s, $property: all, $easing: $ease){
+	transition: $time $property $easing;
+}
+
+// CSS animation
+@keyframes pointActive {
+	0% {
+		box-shadow: 0 0 0 0 rgba(c(orange),0), 0 0 0 0 rgba(#fff,0);
+	}
+	50% {
+		box-shadow: 0 0 0 5px rgba(c(orange),1), 0 0 0 7px rgba(#fff,1);
+	}
+	100% {
+		box-shadow: 0 0 0 10px rgba(c(orange),0), 0 0 0 12px rgba(#fff,0);
+	}
+}
+@keyframes loadSpinner {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+@keyframes loadFade {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.8;
+	}
+}
+@keyframes cloud1 {
+	0% {
+		transform: translateX(0);
+	}
+	50% {
+		transform: translateX(100px);
+	}
+}
+@keyframes cloud2 {
+	0% {
+		transform: translateX(0);
+	}
+	50% {
+		transform: translateX(-100px);
+	}
+}
+
+
+
+html {
+	height: 100%;
+}
+body {
+	font-family: $ff-body;
+	background: url('../images/plane-bg.jpg') top center no-repeat #fff;
+	background-size: cover;
+	background-attachment: fixed;
+	height: 100%;
+	font-size: #{$base-font-size}px;
+	color: c(grey);
+	transform-origin: 0% 100%;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+
+	&.loaded {
+		overflow: visible;
+	}
+}
+
+
+
+.screen-loader {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(darken(c(orange),5%),0.8);
+	text-align: center;
+	z-index: 500;
+	box-shadow: inset 14px 18px 105px rgba(0,0,0,.14);
+	transform-origin: 0 0;
+	overflow: hidden;
+
+	.loading-text {
+		color: #fff;
+		font-size: em(80);
+		font-family: $ff-heading;
+		text-shadow: 0 2px 2px rgba(#000,.5);
+		text-transform: uppercase;
+		animation: loadFade 1.5s ease infinite;
+	}
+}
+#loading-svg {
+	animation: loadSpinner 4s linear infinite;
+}
+
+
+
+*:focus {
+	outline: none;
+}
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+.hidden {
+	display: none;
+}
+.visuallyhidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+.text-left {
+	text-align: left;
+}
+.text-center {
+	text-align: center;
+}
+.text-right {
+	text-align: right;
+}
+
+
+%btn-base {
+	background: c(orange);
+	display: inline-block;
+	border: 0 solid transparent;
+	color: #fff;
+	cursor: pointer;
+	text-transform: uppercase;
+	font-size: em(18);
+	box-shadow: inset 4px 8px 35px rgba(0,0,0,.14), inset 0 0 0 5px transparent;
+	@include trans;
+	&:hover {
+		box-shadow: inset 4px 8px 35px rgba(0,0,0,.25), inset 0 0 0 5px rgba(255,255,255,0.2);
+		.icon-chevron-left {
+			transform: translateX(-2px);
+		}
+		.icon-chevron-right {
+			transform: translateX(2px);
+		}
+	}
+
+	.icon {
+		@include trans;
+	}
+
+	svg {
+		fill: #fff;
+	}
+}
+.btn {
+	@extend %btn-base;
+
+	&-control {
+		@extend %btn-base;
+		width: 50px;
+		height: 50px;
+	}
+
+	&-intro {
+		padding: 15px;
+		margin-top: em(30,18);
+		font-weight: 700;
+
+		svg {
+			margin-left: 15px;
+		}
+	}
+}
+
+.icon {
+	display: inline-block;
+	vertical-align: middle;
+
+	&-chevron {
+		&-left {
+			width: 13px;
+			height: 23px;
+		}
+		&-right {
+			width: 13px;
+			height: 23px;
+			margin-top: -3px;
+		}
+	}
+
+	&-plane {
+		width: 28px;
+		height: 18px;
+		position: absolute;
+		top: 40px;
+		left: 50%;
+		margin-left: -14px;
+		text-align: center;
+		@include trans;
+
+		svg {
+			display: inline-block;
+			vertical-align: top;
+			width: 28px;
+			height: 18px;
+		}
+
+		[data-stage-current*="0"] ~ &,
+		[data-stage-current*="9"] ~ &,
+		[data-stage-current*="10"] ~ &,
+		[data-stage-current*="11"] ~ &,
+		[data-stage-current*="12"] ~ &,
+		[data-stage-current*="13"] ~ &,
+		[data-stage-current*="14"] ~ & {
+			opacity: 0 !important;
+		}
+	}
+}
+
+[data-stage-go],
+[data-stage-next],
+[data-stage-prev] {
+	cursor: pointer;
+}
+
+.plane {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	min-height: 1270px;
+	width: 100%;
+	min-width: 1907px;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	overflow: hidden;
+	@include trans;
+	transform-origin: 0% 100%;
+
+	&__seat {
+		flex: 1;
+		height: 1270px;
+		min-width: 1907px;
+		background: url('../images/seat.png') top center no-repeat transparent;
+		padding-top: 300px;
+		transform: translateY(100%);
+	}
+
+	&__tv {
+		width: 996px;
+		height: 588px;
+		background: url('../images/tv-content.png') 0 0 repeat #dedede;
+		margin: 0 auto;
+		border-radius: 14px;
+		box-shadow: inset 0 0 0 18px rgba(#eaeaea, .5);
+		position: relative;
+		z-index: 20;
+		left: 8px;
+		overflow: hidden;
+	}
+
+}
+
+.stage {
+	white-space: nowrap;
+
+	&-controls {
+		&-prev,
+		&-next {
+			@extend %btn-base;
+			width: 50px;
+			height: 50px;
+			position: absolute;
+			top: 50%;
+			margin-top: -25px;
+			user-select: none;
+
+		}
+		&-prev {
+			left: 0;
+		}
+		&-next {
+			right: 0;
+		}
+	}
+
+	&-progress {
+		background: c(orange);
+		box-shadow: inset 0px 9px 35px 0px rgba(0, 0, 0, 0.14);
+		color: #fff;
+		padding: 10px 20px 15px;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		max-height: 90px;
+		user-select: none;
+
+		&__line {
+			height: 35px;
+			width: 770px;
+			margin: auto;
+			position: relative;
+
+			&:before {
+				content: ' ';
+				position: absolute;
+				top: 50%;
+				left: 0;
+				width: 100%;
+				height: 2px;
+				margin-top: -1px;
+				background: #fff;
+			}
+		}
+
+		&__labels {
+			height: 23px;
+			width: 770px;
+			margin: 5px auto 0;
+			position: relative;
+			white-space: nowrap;
+		}
+
+		%btn-point {
+			display: inline-block;
+			position: absolute;
+			top: 50%;
+			border-radius: 50%;
+			cursor: pointer;
+			@include trans;
+			&:before {
+				content: ' ';
+				display: inline-block;
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100%;
+				width: 100%;
+				border-radius: 50%;
+			}
+			&.active {
+				border-radius: 50%;
+				animation: pointActive 2.5s ease infinite;
+			}
+		}
+
+		.btn-point {
+			@extend %btn-point;
+			height: 10px;
+			width: 10px;
+			margin: -5px 0 0 -5px;
+			&:before {
+				height: 10px;
+				width: 10px;
+				background: c(orange);
+				border: 2px solid #fff;
+			}
+
+			&--main {
+				@extend %btn-point;
+				height: 12px;
+				width: 12px;
+				margin: -6px 0 0 -6px;
+				&:before {
+					height: 12px;
+					width: 12px;
+					background: #fff;
+				}
+			}
+
+			&-1 { // main point
+				left: 0;
+			}
+
+			&-2 { // main point
+				left: 33.3%;
+			}
+
+			&-3 {
+				left: 38.85%;
+			}
+
+			&-4 {
+				left: 44.4%;
+			}
+
+			&-5 {
+				left: 49.95%;
+			}
+
+			&-6 {
+				left: 55.5%;
+			}
+
+			&-7 {
+				left: 61.05%;
+			}
+
+			&-8 { // main point
+				left: 66.6%;
+			}
+
+			&-9 {
+				left: 71.36%;
+			}
+
+			&-10 {
+				left: 76.12%;
+			}
+
+			&-11 {
+				left: 80.88%;
+			}
+
+			&-12 {
+				left: 85.64%;
+			}
+
+			&-13 {
+				left: 90.4%;
+			}
+
+			&-14 {
+				left: 95.16%;
+			}
+
+			&-15 { // main point
+				left: 100%;
+			}
+		}
+
+		%label {
+			font-size: em(20);
+			font-family: $ff-heading;
+			color: #fff;
+			text-transform: uppercase;
+			position: absolute;
+			top: 0;
+			transform: translateX(-50%);
+			cursor: pointer;
+			white-space: nowrap;
+		}
+
+		.label {
+			&-1{
+				@extend %label;
+				left: 0;
+			}
+			&-2{
+				@extend %label;
+				left: 33.33%;
+			}
+			&-3{
+				@extend %label;
+				left: 66.66%;
+			}
+			&-4{
+				@extend %label;
+				left: 100%;
+			}
+		}
+
+	}
+}
+
+.screen {
+	width: 996px;
+	height: 588px;
+	position: relative;
+	z-index: 10;
+	overflow: hidden;
+	display: inline-block;
+	vertical-align: top;
+	white-space: normal;
+	text-align: center;
+	padding: 1px 40px;
+
+	p {
+		max-width: 750px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	&-intro {
+		text-align: center;
+		padding-top: 250px;
+		background: url('../videos/plane.jpg') center no-repeat;
+		background-size: cover;
+
+		&__cover {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			z-index: 10;
+			background: rgba(#333, .1);
+			box-shadow: inset 0 0 200px rgba(51, 51, 51, 0.3);
+		}
+
+		&__content {
+			position: relative;
+			z-index: 20;
+		}
+
+		.heading {
+			&-1,
+			&-2 {
+				text-transform: uppercase;
+				color: #fff;
+				margin: 0 auto;
+				text-shadow: 0 1px 1px rgba(0,0,0,.5);
+				font-family: $ff-heading;
+			}
+			&-1 {
+				font-size: em(70);
+				font-family: $ff-heading;
+			}
+			&-2 {
+				font-size: em(40);
+				font-family: $ff-body;
+			}
+		}
+	}
+
+	&-1 {
+		.heading {
+			&-1,
+			&-2 {
+				text-transform: uppercase;
+				color: c(grey);
+				font-family: $ff-heading;
+			}
+			&-1 {
+				font-size: em(40);
+				line-height: 1;
+				margin: 70px auto 25px;
+			}
+			&-2 {
+				font-size: em(22);
+			}
+		}
+	}
+
+	&-2 {
+		p {
+			font-size: em(18);
+			font-family: $ff-body;
+			line-height: 1.4;
+			margin: 0 auto;
+		}
+		.heading {
+			&-1{
+				text-transform: uppercase;
+				color: c(grey);
+				font-family: $ff-heading;
+				font-size: em(40);
+				line-height: 1;
+				margin: 70px auto 20px;
+			}
+			&-2 {
+				text-transform: uppercase;
+				color: c(grey);
+				font-family: $ff-heading;
+				font-size: em(22);
+				margin: em(22,22) auto;
+			}
+		}
+	}
+
+	&-3 {
+		p {
+			font-size: em(18);
+			font-family: $ff-body;
+			line-height: 1.4;
+			margin: 0 auto;
+		}
+		.heading {
+			&-1{
+				text-transform: uppercase;
+				color: c(grey);
+				font-family: $ff-heading;
+				font-size: em(40);
+				line-height: 1;
+				margin: 70px auto 20px;
+			}
+			&-2{
+				text-transform: uppercase;
+				color: c(grey);
+				font-family: $ff-heading;
+				font-size: em(25);
+				line-height: 1;
+				margin: 10px auto;
+			}
+		}
+	}
+
+	&-4 {
+		p {
+			font-size: em(18);
+			font-family: $ff-body;
+			line-height: 1.4;
+			margin: 0 auto;
+		}
+		.heading {
+			&-1 {
+				text-transform: uppercase;
+				color: c(grey);
+				font-family: $ff-heading;
+				font-size: em(40);
+				line-height: 1;
+				margin: 70px auto 20px;
+			}
+			&-2 {
+				text-transform: uppercase;
+				color: c(grey);
+				font-family: $ff-heading;
+				font-size: em(22);
+				margin: em(22,22) auto;
+			}
+		}
+	}
+
+
+
+	&-6 {
+		.heading {
+			&-1{
+				text-transform: uppercase;
+				color: c(grey);
+				font-family: $ff-heading;
+				font-size: em(40);
+				line-height: 1;
+				margin: 70px auto 20px;
+			}
+			&-2{
+				text-transform: uppercase;
+				color: c(grey);
+				font-family: $ff-heading;
+				font-size: em(25);
+				line-height: 1;
+				margin: 10px auto;
+			}
+			&-3{
+				text-transform: uppercase;
+				color: c(grey);
+				font-family: $ff-heading;
+				font-size: em(18);
+				line-height: 1.4;
+				a {
+					color: c(grey);
+					display: inline-block;
+					text-decoration: none;
+					padding: 2px;
+					border-bottom: 2px solid transparent;
+					@include trans;
+
+					&:hover {
+						border-bottom-color: c(grey);
+					}
+				}
+				.name {
+					display: inline-block;
+					margin-bottom: 5px;
+				}
+			}
+		}
+	}
+
+}
+
+
+.cloud {
+	position: absolute;
+
+	&-1 {
+		top: 83px;
+		left: 86px;
+		animation: cloud1 30s ease infinite;
+	}
+	&-2 {
+		top: 122px;
+		left: 786px;
+		animation: cloud2 40s ease infinite;
+	}
+	&-3 {
+		top: 352px;
+		left: 685px;
+		animation: cloud2 35s ease infinite;
+	}
+	&-4 {
+		top: 293px;
+		left: 152px;
+		animation: cloud1 38s ease infinite;
+	}
+}
+
+
+.team {
+	display: table;
+	width: 840px;
+	margin: 30px auto 0;
+
+	p {
+		margin: 0;
+	}
+
+	&__member {
+		display: table-cell;
+		vertical-align: top;
+		width: 20%;
+		cursor: pointer;
+
+		&-img {
+			text-align: center;
+
+			img {
+				height: 120px;
+				width: auto;
+				border: 2px solid c(grey,dark);
+				border-radius: 50%;
+			}
+		}
+	}
+
+	.team__member-details {
+		font-size: em(16);
+		text-transform: uppercase;
+
+		strong {
+			display: block;
+			font-family: $ff-heading;
+		}
+	}
+}
+
+
+%highlight {
+	background-color: transparent;
+	background-position: top center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 85px;
+	left: 0;
+}
+.highlight {
+	&-1 {
+		@extend %highlight;
+		background-image: url('../images/content/perth-city.jpg');
+	}
+	&-2 {
+		@extend %highlight;
+		background-image: url('../images/content/trafalgar-travel.jpg');
+	}
+	&-3 {
+		@extend %highlight;
+		background-image: url('../images/content/st-andrews.jpg');
+	}
+	&-4 {
+		@extend %highlight;
+		background-image: url('../images/content/tom-morris.jpg');
+	}
+	&-5 {
+		@extend %highlight;
+		background-image: url('../images/content/wa-museum.jpg');
+	}
+	&-6 {
+		@extend %highlight;
+		background-image: url('../images/content/arcbs.jpg');
+	}
+}
