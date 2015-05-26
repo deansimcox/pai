@@ -1,103 +1,6 @@
 'use strict';
 
-/* globals Power2, TimelineLite, TweenLite, Vivus */
-
-function once(func) {
-	/* jshint ignore:start, unused: false */
-    var ran = false, memo;
-    return function() {
-        if (ran) return memo;
-        ran = true;
-        return memo = func.apply(this, arguments);
-    };
-	/* jshint ignore:end */
-}
-
-function debounce(func, wait, immediate) {
-	/* jshint ignore:start, unused: false */
-	var timeout;
-	return function() {
-		var context = this, args = arguments;
-		var later = function() {
-			timeout = null;
-			if (!immediate) func.apply(context, args);
-		};
-		var callNow = immediate && !timeout;
-		clearTimeout(timeout);
-		timeout = setTimeout(later, wait);
-		if (callNow) func.apply(context, args);
-	};
-	/* jshint ignore:end */
-}
-
-var smoothScrollTo = function(element, target, duration) {
-	/* jshint ignore:start, unused: false */
-	target = Math.round(target);
-	duration = Math.round(duration);
-	if (duration < 0) {
-		return Promise.reject("bad duration");
-	}
-	if (duration === 0) {
-		element.scrollTop = target;
-		return Promise.resolve();
-	}
-
-	var start_time = Date.now();
-	var end_time = start_time + duration;
-
-	var start_top = element.scrollTop;
-	var distance = target - start_top;
-
-	// based on http://en.wikipedia.org/wiki/Smoothstep
-	var smooth_step = function(start, end, point) {
-		if(point <= start) { return 0; }
-		if(point >= end) { return 1; }
-		var x = (point - start) / (end - start); // interpolation
-		return x*x*(3 - 2*x);
-	}
-
-	return new Promise(function(resolve, reject) {
-		// This is to keep track of where the element's scrollTop is
-		// supposed to be, based on what we're doing
-		var previous_top = element.scrollTop;
-
-		// This is like a think function from a game loop
-		var scroll_frame = function() {
-			// if(element.scrollTop != previous_top) {
-			// 	reject("interrupted");
-			// 	return;
-			// }
-
-			// set the scrollTop for this frame
-			var now = Date.now();
-			var point = smooth_step(start_time, end_time, now);
-			var frameTop = Math.round(start_top + (distance * point));
-			element.scrollTop = frameTop;
-
-			// check if we're done!
-			if(now >= end_time) {
-				resolve();
-				return;
-			}
-
-			// If we were supposed to scroll but didn't, then we
-			// probably hit the limit, so consider it done; not
-			// interrupted.
-			if(element.scrollTop === previous_top && element.scrollTop !== frameTop) {
-				resolve();
-				return;
-			}
-			previous_top = element.scrollTop;
-
-			// schedule next frame for execution
-			setTimeout(scroll_frame, 0);
-		}
-
-		// boostrap the animation process
-		setTimeout(scroll_frame, 0);
-	});
-	/* jshint ignore:end */
-}
+/* globals Power2, Sine, TimelineLite, TweenLite, Vivus, smoothScrollTo, debounce, once */
 
 ;(function(win, doc, $){
 
@@ -124,15 +27,40 @@ var smoothScrollTo = function(element, target, duration) {
 			newxtArrow: $('#next-arrow-icon')
 		};
 
+		var highlight = {
+			h1: $('.highlight-1'),
+			h2: $('.highlight-2'),
+			h3: $('.highlight-3'),
+			h4: $('.highlight-4'),
+			h5: $('.highlight-5'),
+			h6: $('.highlight-6'),
+			h7: $('.highlight-7')
+		};
+
 		var teamMembers = $('.team__member'),
 		body = $('body'),
+		planeEl = $('.plane'),
 		planeSeat = $('.plane__seat'),
 		loader = $('.screen-loader'),
+		h5Scroll = $('.highlight-5__scroll'),
+		h5Hover = $('.highlight-5__hover'),
 		memberImgSingle = function(parent, not){
 			var img = $('.team__member-img').filter(function(){
 				return $(this).parents(parent).length === not && $(this).parents('.stage-2').length === 0;
 			});
 			return img;
+		};
+
+		var hideControls = function(timeline, instant){
+			if( instant ){
+				timeline.staggerTo([stage.prevEl, stage.nextEl, stage.progress], 0, {y: 20, opacity: 0}, 0);
+			} else {
+				timeline.staggerTo([stage.prevEl, stage.nextEl, stage.progress], 0.2, {y: 20, opacity: 0}, 0.2);
+			}
+		};
+
+		var showControls = function(timeline){
+			timeline.staggerTo([stage.prevEl, stage.nextEl, stage.progress], 0.2, {y: 0, opacity: 1}, 0.2);
 		};
 
 
@@ -178,7 +106,7 @@ var smoothScrollTo = function(element, target, duration) {
 				tStageItems.to(teamMembers, 0, {y: 50, opacity: 0, scale: 0.9});
 			}
 
-			// stages 3 - 7
+			// stages 3 - 7 the people stages
 			if( stage.newStage === 3 || stage.newStage === 4 || stage.newStage === 5 || stage.newStage === 6 || stage.newStage === 7 ){
 				tStageItems.to( memberImgSingle('.stage-'+stage.newStage, 0), 0, {y: 50, opacity: 0, scale: 0.9});
 				tStageItems.to( memberImgSingle('.stage-'+stage.newStage, 1), 0.45, {y: 0, opacity: 1, scale: 1, ease: stage.ease});
@@ -195,8 +123,38 @@ var smoothScrollTo = function(element, target, duration) {
 				TweenLite.to(icons.newxtArrow, 0, {x: -20, opacity: 0});
 			}
 
+			// stages 9 - 14 The highlight stages
+			if( stage.newStage === 9 || stage.newStage === 10 || stage.newStage === 11 || stage.newStage === 12 || stage.newStage === 13 || stage.newStage === 14 || stage.newStage === 15 ){
+
+				var newHighlight = stage.newStage - 8;
+
+				hideControls(tStageItems);
+
+				if(stage.newStage === 13) {
+
+					tStageItems.to( highlight['h' + newHighlight] , 1, {y: -73, ease: Sine.easeOut});
+					tStageItems.to( h5Scroll , 1, {x: '-100%'});
+					tStageItems.to( h5Hover , 1, {opacity: 1});
+
+				} else {
+
+					var hHeight = highlight['h' + newHighlight].outerHeight();
+					tStageItems.to( highlight['h' + newHighlight] , (hHeight / 300), {y: (- hHeight + 588), ease: Sine.easeOut});
+					tStageItems.to( h5Scroll , 0, {x: '0%'});
+					tStageItems.to( h5Hover , 0, {opacity: 0});
+
+				}
+
+				for(var i = 0; i < Object.keys(highlight).length; i++){
+					if(highlight['h' + (i + 1)] !== highlight['h' + newHighlight]){
+						tStageItems.to( highlight['h' + (i + 1)] , 0, {y: 0});
+					}
+				}
+				showControls(tStageItems);
+			}
+
 			// stage 15 - last stage
-			if(stage.newStage === 15){
+			if(stage.newStage === 16){
 				new Vivus('attendant', {type: 'async', duration: 110, animTimingFunction: Vivus.EASE_OUT});
 				tStageItems.to( icons.attendant, 0.8, {opacity: 1, y: 0, delay: 1, ease: stage.ease});
 			} else {
@@ -250,12 +208,10 @@ var smoothScrollTo = function(element, target, duration) {
 		
 		var resizeScale = function(func){
 			var wWidth = $(win).outerWidth();
-			if( wWidth < 2000){
+			if( wWidth < 1907){
 				var wHeight = $(win).outerHeight();
-				var newScale = wWidth / 2000;
-				var newScaleOp = 1 + (1 - newScale);
-				body.attr('style', '-webkit-transform: scale('+newScale+');-moz-transform: scale('+newScale+');-ms-transform: scale('+newScale+');-o-transform: scale('+newScale+');transform: scale('+newScale+');height:'+wHeight+'px;');
-				loader.attr('style', '-webkit-transform: scale('+newScaleOp+');-moz-transform: scale('+newScaleOp+');-ms-transform: scale('+newScaleOp+');-o-transform: scale('+newScaleOp+');transform: scale('+newScaleOp+');');
+				var newScale = wWidth / 1907;
+				planeEl.attr('style', '-webkit-transform: scale('+newScale+');-moz-transform: scale('+newScale+');-ms-transform: scale('+newScale+');-o-transform: scale('+newScale+');transform: scale('+newScale+');height:'+wHeight+'px;');
 				if(typeof func === 'function'){
 					func( newScale );
 				}
@@ -274,17 +230,24 @@ var smoothScrollTo = function(element, target, duration) {
 		 *	Document ready functions below
 		 */
 
-		var transIntro = function(){
+		var intro1 = $('.screen-intro .heading-1');
+		var intro2 = $('.screen-intro .heading-2');
+		var intro3 = $('.screen-intro .btn-intro');
+		var intro4 = $('.screen-intro .disclaimer');
 
-			var intro1 = $('.screen-intro .heading-1');
-			var intro2 = $('.screen-intro .heading-2');
-			var intro3 = $('.screen-intro .btn-intro');
+		TweenLite.to(intro1, 0, {y: -50, opacity: 0});
+		TweenLite.to(intro2, 0, {y: 20, opacity: 0});
+		TweenLite.to(intro3, 0, {x: -10, opacity: 0});
+		TweenLite.to(intro4, 0, {opacity: 0});
+
+		var transIntro = function(){
 
 			var tIntro = new TimelineLite();
 
-			tIntro.from(intro1, 1, {y: -50, opacity: 0, ease: stage.ease});
-			tIntro.from(intro2, 0.8, {y: 20, opacity: 0, ease: stage.ease});
-			tIntro.from(intro3, 0.2, {x: -10, opacity: 0, ease: stage.ease});
+			tIntro.to(intro1, 1, {y: 0, opacity: 1, ease: stage.ease});
+			tIntro.to(intro2, 0.8, {y: 0, opacity: 1, ease: stage.ease});
+			tIntro.to(intro3, 0.2, {x: 0, opacity: 1, ease: stage.ease});
+			tIntro.to(intro4, 0.6, {opacity: 1, ease: stage.ease});
 			
 		};
 
@@ -304,10 +267,10 @@ var smoothScrollTo = function(element, target, duration) {
 			resizing: false
 		}).append('<div class="screen-intro__cover"></div>');
 
-		transIntro();
-
 		TweenLite.to($(['.stage-controls button', stage.progress]), 0, {y: 20, opacity: 0});
 		TweenLite.to(icons.belt, 0, {y: 20, opacity: 0});
+		TweenLite.to(h5Hover, 0, {opacity: 0});
+		TweenLite.to(icons.plane, 0, {x: -200, y: 100, opacity: 0});
 		TweenLite.to(icons.plane, 0, {x: -200, y: 100, opacity: 0});
 		new Vivus('attendant', {type: 'async', duration: 1});
 
@@ -331,6 +294,8 @@ var smoothScrollTo = function(element, target, duration) {
 						return Math.min( scroll, top );
 					};
 					smoothScrollTo( body[0], initialPos(), 1000 );
+
+					transIntro();
 
 				}});
 
